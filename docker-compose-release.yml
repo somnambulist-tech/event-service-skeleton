@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  events-app:
+    build:
+      context: .
+      dockerfile: config/docker/prod/app/Dockerfile
+    networks:
+      - app_network_backend
+
+  events-listener:
+    build:
+      context: .
+      dockerfile: config/docker/prod/events/Dockerfile
+    depends_on:
+      - events-app
+    networks:
+      - app_network_backend
+
+networks:
+  app_network_backend:
+    external: true

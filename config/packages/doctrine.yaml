@@ -1,0 +1,8 @@
+doctrine:
+    dbal:
+        # configure these for your database server
+        url: '%env(resolve:DATABASE_URL)%'
+        schema_filter: '~^(?!messenger_messages)~'
+        mapping_types:
+            # doctrine + postgres sometimes screws up and prefixes text with an _...
+            _text: string

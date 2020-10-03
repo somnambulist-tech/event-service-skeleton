@@ -1,0 +1,32 @@
+version: '3.5'
+
+services:
+  events-app:
+    build:
+      context: .
+      dockerfile: config/docker/dev/app/Dockerfile
+    networks:
+      - mycompany_network_backend
+    labels:
+      traefik.enable: true
+      traefik.http.routers.events-app.rule: "Host(`events.example.dev`)"
+      traefik.http.routers.events-app.tls: true
+      traefik.http.services.events-app.loadbalancer.server.port: 8080
+
+  events-listener:
+    build:
+      context: .
+      dockerfile: config/docker/dev/events/Dockerfile
+    depends_on:
+      - events-app
+    networks:
+      - mycompany_network_backend
+
+  events-redis:
+    image: redis:alpine
+    networks:
+      - mycompany_network_backend
+
+networks:
+  mycompany_network_backend:
+    external: true

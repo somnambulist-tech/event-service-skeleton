@@ -1,0 +1,20 @@
+<?php declare(strict_types=1);
+
+namespace App\Events\Tests;
+
+use PHPUnit\Framework\TestCase;
+
+/**
+ * Class SampleTest
+ *
+ * @package    App\Events\Tests
+ * @subpackage App\Events\Tests\SampleTest
+ */
+class SampleTest extends TestCase
+{
+
+    public function testTesting()
+    {
+        $this->assertTrue(true);
+    }
+}
