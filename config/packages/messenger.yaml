@@ -32,7 +32,6 @@ framework:
                     exchange:
                         name: domain_events
                         type: fanout
-                        durable: true
 
             failed: 'doctrine://default?queue_name=failed'
             sync: 'sync://'

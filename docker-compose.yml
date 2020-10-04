@@ -19,6 +19,7 @@ services:
       dockerfile: config/docker/dev/events/Dockerfile
     depends_on:
       - events-app
+    restart: on-failure
     networks:
       - mycompany_network_backend
 
