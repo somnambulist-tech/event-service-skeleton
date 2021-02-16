@@ -5,6 +5,9 @@ intended to be used with the [data service](https://github.com/somnambulist-tech
 This project is pre-configured to start an app container and an event queue listener. Both
 will send logs to the data-service syslog service.
 
+If you are working with micro services then be sure to check out: [Project Manager](https://github.com/somnambulist-tech/project-manager)
+a CLI toolkit that makes working with multiple services a little bit easier.
+
 ## Usage / Installation
 
 Create a new repository using this as a base and then update / modify / do what you need

@@ -2,9 +2,14 @@
 
 namespace App\Events\Tests\Support\Behaviours;
 
+use App\Tests\Support\Behaviours\BootTestClient;
+use RuntimeException;
 use function dump;
+use function in_array;
 use function json_decode;
 use function json_encode;
+use function property_exists;
+use function sprintf;
 
 /**
  * Class MakeJsonRequestTo
@@ -16,23 +21,6 @@ trait MakeJsonRequestTo
 {
 
     use GenerateRouteTo;
-
-    /**
-     * Uses routeTo() to generate a route from the named route
-     *
-     * @param string $route
-     * @param array  $params
-     * @param string $method
-     * @param array  $payload
-     * @param int    $expectedStatusCode
-     *
-     * @return mixed
-     */
-    protected function makeJsonRequestToNamedRoute(string $route, array $params = [], string $method = 'GET', array $payload = [],
-        int $expectedStatusCode = 200)
-    {
-        return $this->makeJsonRequestTo($this->routeTo($route, $params), $method, $payload, $expectedStatusCode);
-    }
 
     /**
      * Makes a request into the Kernel, checks the response status code and returns the payload
@@ -58,9 +46,13 @@ trait MakeJsonRequestTo
      */
     protected function makeJsonRequestTo(string $uri, string $method = 'GET', array $payload = [], int $expectedStatusCode = 200)
     {
+        if (!property_exists($this, '__kernelBrowserClient')) {
+            throw new RuntimeException(sprintf('Missing booted Kernel client, did you include %s ?', BootTestClient::class));
+        }
+
         $content = null;
         $files   = $server = [];
-        $client  = static::createClient();
+        $client  = $this->__kernelBrowserClient;
 
         if (isset($payload['files'])) {
             $files                  = $payload['files'];
@@ -84,5 +76,21 @@ trait MakeJsonRequestTo
         $this->assertEquals($expectedStatusCode, $response->getStatusCode());
 
         return json_decode($response->getContent(), true);
+    }
+
+    /**
+     * Uses routeTo() to generate a route from the named route
+     *
+     * @param string $route
+     * @param array  $params
+     * @param string $method
+     * @param array  $payload
+     * @param int    $expectedStatusCode
+     *
+     * @return mixed
+     */
+    protected function makeJsonRequestToNamedRoute(string $route, array $params = [], string $method = 'GET', array $payload = [], int $expectedStatusCode = 200)
+    {
+        return $this->makeJsonRequestTo($this->routeTo($route, $params), $method, $payload, $expectedStatusCode);
     }
 }

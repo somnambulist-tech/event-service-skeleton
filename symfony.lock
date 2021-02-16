@@ -123,6 +123,12 @@
     "eloquent/enumeration": {
         "version": "6.0.0"
     },
+    "fakerphp/faker": {
+        "version": "v1.13.0"
+    },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.3"
+    },
     "fzaninotto/faker": {
         "version": "v1.8.0"
     },
@@ -246,6 +252,9 @@
     "psr/log": {
         "version": "1.1.2"
     },
+    "rakit/validation": {
+        "version": "v1.4.0"
+    },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
     },
@@ -329,6 +338,9 @@
     },
     "somnambulist/domain": {
         "version": "2.2.7"
+    },
+    "somnambulist/form-request-bundle": {
+        "version": "dev-main"
     },
     "somnambulist/read-models": {
         "version": "1.0.2"

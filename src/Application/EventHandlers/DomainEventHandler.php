@@ -3,7 +3,7 @@
 namespace App\Events\Application\EventHandlers;
 
 use Doctrine\DBAL\Connection;
-use Somnambulist\Domain\Events\AbstractEvent;
+use Somnambulist\Components\Domain\Events\AbstractEvent;
 
 /**
  * Class DomainEventHandler

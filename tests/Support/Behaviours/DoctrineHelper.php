@@ -3,7 +3,7 @@
 namespace App\Events\Tests\Support\Behaviours;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Somnambulist\Domain\Doctrine\AbstractEntityLocator;
+use Somnambulist\Components\Domain\Doctrine\AbstractEntityLocator;
 
 /**
  * Trait DoctrineHelper

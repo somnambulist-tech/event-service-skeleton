@@ -2,7 +2,7 @@
 
 namespace App\Events\Resources;
 
-use Somnambulist\Domain\Doctrine\TypeBootstrapper;
+use Somnambulist\Components\Domain\Doctrine\TypeBootstrapper;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**

@@ -38,5 +38,5 @@ framework:
 
         routing:
             # Route your messages to the transports
-            Somnambulist\Domain\Commands\AbstractCommand: sync
-            Somnambulist\Domain\Queries\AbstractQuery: sync
+            Somnambulist\Components\Domain\Commands\AbstractCommand: sync
+            Somnambulist\Components\Domain\Queries\AbstractQuery: sync
