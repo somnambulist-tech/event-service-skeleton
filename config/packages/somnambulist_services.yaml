@@ -4,9 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    Somnambulist\Components\ReadModels\EventSubscribers\IdentityMapClearerSubscriber:
-        tags: ['kernel.event_subscriber']
-
     Somnambulist\Components\Domain\Events\Publishers\DoctrineEventPublisher:
         tags: ['doctrine.event_subscriber']
 
