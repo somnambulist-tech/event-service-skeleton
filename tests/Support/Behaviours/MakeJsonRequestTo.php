@@ -2,7 +2,6 @@
 
 namespace App\Events\Tests\Support\Behaviours;
 
-use App\Tests\Support\Behaviours\BootTestClient;
 use RuntimeException;
 use function dump;
 use function in_array;
