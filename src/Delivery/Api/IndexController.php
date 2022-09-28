@@ -5,12 +5,6 @@ namespace App\Events\Delivery\Api;
 use Somnambulist\Bundles\ApiBundle\Controllers\ApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-/**
- * Class IndexController
- *
- * @package    App\Events\Delivery\Api
- * @subpackage App\Events\Delivery\Api\IndexController
- */
 class IndexController extends ApiController
 {
 

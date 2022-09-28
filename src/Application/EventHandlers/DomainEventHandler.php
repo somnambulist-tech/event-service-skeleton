@@ -3,17 +3,10 @@
 namespace App\Events\Application\EventHandlers;
 
 use Doctrine\DBAL\Connection;
-use Somnambulist\Components\Domain\Events\AbstractEvent;
+use Somnambulist\Components\Events\AbstractEvent;
 
-/**
- * Class DomainEventHandler
- *
- * @package    App\Events\Domain\Services\EventHandlers
- * @subpackage App\Events\Application\EventHandlers\DomainEventHandler
- */
 class DomainEventHandler
 {
-
     private Connection $connection;
 
     public function __construct(Connection $connection)

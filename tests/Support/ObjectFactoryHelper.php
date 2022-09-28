@@ -14,17 +14,11 @@ use function in_array;
 use function sprintf;
 
 /**
- * Class ObjectFactoryHelper
- *
- * @package App\Events\Tests\Support
- * @subpackage App\Events\Tests\Support\ObjectFactoryHelper
- *
  * @property-read Uuid $uuid
  * @property-read Generator $faker
  */
 class ObjectFactoryHelper
 {
-
     private array     $factories;
     private Generator $faker;
 

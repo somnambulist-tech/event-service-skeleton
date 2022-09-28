@@ -5,15 +5,8 @@ namespace App\Events\Tests\Support\Behaviours;
 use App\Events\Tests\Support\ObjectFactoryHelper;
 use Faker\Factory;
 
-/**
- * Trait UseObjectFactoryHelper
- *
- * @package    App\Events\Tests\Support\Behaviours
- * @subpackage App\Events\Tests\Support\Behaviours\UseObjectFactoryHelper
- */
 trait UseObjectFactoryHelper
 {
-
     private ?ObjectFactoryHelper $factory = null;
 
     protected function factory(string $locale = Factory::DEFAULT_LOCALE): ObjectFactoryHelper
