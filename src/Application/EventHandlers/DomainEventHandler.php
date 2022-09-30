@@ -3,45 +3,47 @@
 namespace App\Events\Application\EventHandlers;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Statement;
 use Somnambulist\Components\Events\AbstractEvent;
+use function date;
+use function floor;
+use function json_encode;
+use function sprintf;
 
 class DomainEventHandler
 {
-    private Connection $connection;
+    private ?Statement $statement = null;
 
-    public function __construct(Connection $connection)
+    public function __construct(private Connection $connection)
     {
-        $this->connection = $connection;
     }
 
     public function __invoke(AbstractEvent $event)
     {
-        $date = $this->getDateWithMicroSeconds($event->getTime());
-
-        $qb = $this->connection->createQueryBuilder();
-        $qb
-            ->insert('domain_events')
-            ->values([
-                'aggregate_root' => ':ag_root',
-                'aggregate_id'   => ':ag_id',
-                'event_name'     => ':ev_name',
-                'payload'        => ':ev_payload',
-                'context'        => ':ev_context',
-                'created_at'     => ':date',
-            ])
-            ->setParameters([
-                ':ag_root'    => $event->getAggregate()->class(),
-                ':ag_id'      => $event->getAggregate()->identity(),
-                ':ev_name'    => $event->getType(),
-                ':ev_payload' => json_encode($event->payload()->toArray()),
-                ':ev_context' => json_encode($event->context()->toArray()),
-                ':date'       => $date,
-            ])
-        ;
-
-        $qb->execute();
+        $this->getStatement()->executeStatement([
+            'ag_root'    => $event->aggregate()->class(),
+            'ag_id'      => $event->aggregate()->identity(),
+            'ev_name'    => $event->type(),
+            'ev_payload' => json_encode($event->payload()->toArray()),
+            'ev_context' => json_encode($event->context()->toArray()),
+            'date'       => $this->getDateWithMicroSeconds($event->createdAt()),
+        ]);
 
         return true;
+    }
+
+    private function getStatement(): Statement
+    {
+        if (null === $this->statement) {
+            $this->statement = $this->connection->prepare('
+                INSERT INTO domain_events
+                    (aggregate_root, aggregate_id, event_name, payload, context, created_at)
+                VALUES
+                    (:ag_root, :ag_id, :ev_name, :ev_payload, :ev_context, :date)
+            ');
+        }
+
+        return $this->statement;
     }
 
     public function getDateWithMicroSeconds(float $time): string

@@ -8,6 +8,8 @@ services:
         tags: ['doctrine.event_subscriber']
 
     Somnambulist\Components\Events\Adapters\DomainEventNormalizer:
+        arguments:
+            $supportedEventPrefixes: ['App\']
 
     Somnambulist\Components\Commands\CommandBus:
         alias: Somnambulist\Components\Commands\Adapters\MessengerCommandBus
