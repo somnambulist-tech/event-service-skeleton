@@ -66,3 +66,11 @@ services:
 
     App\Events\Infrastructure\Persistence\Repositories\:
         resource: '../src/Infrastructure/Persistence/Repositories/*'
+
+when@dev: &dev
+    services:
+        App\Events\Resources\Fixtures\:
+            resource: '../src/Resources/Fixtures'
+            tags: [ 'doctrine.fixture.orm' ]
+
+when@test: *dev

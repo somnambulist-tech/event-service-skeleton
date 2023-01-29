@@ -1,17 +1,18 @@
 
-FROM somnambulist/php-ppm:8.0-latest
+FROM somnambulist/php-ppm:8.1-latest
 ENV TERM=xterm-256color
 
 RUN apk --update add ca-certificates \
     && apk update \
     && apk upgrade \
     && apk --no-cache add -U \
-    php8-pdo_pgsql \
-    php8-pgsql \
+    php81-pdo_pgsql \
+    php81-pgsql \
+    php81-pecl-amqp \
     && rm -rf /var/cache/apk/* /tmp/*
 
 # setup custom PHP ini files
-COPY config/docker/dev/events/conf.d/zz-custom.ini *user.ini /etc/php8/conf.d/
+COPY config/docker/dev/events/conf.d/zz-custom.ini *user.ini /etc/php81/conf.d/
 
 WORKDIR /app
 

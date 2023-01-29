@@ -1,7 +1,0 @@
-
-parameters:
-
-services:
-    App\Events\Resources\Fixtures\:
-        resource: '../src/Resources/Fixtures'
-        tags: ['doctrine.fixture.orm']
